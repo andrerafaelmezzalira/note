@@ -42,14 +42,11 @@ public class MovementService {
 			Integer noteValue = stock.getNote().getValue();
 			Integer notes = (int) (value.doubleValue() / noteValue.doubleValue());
 
-			if (notes.equals(0)) {
-				continue;
-			}
-
 			System.out.println("Valor da nota " + noteValue);
 			System.out.println("Quantidade de notas necessárias " + notes);
 			System.out.println("Quantidade de notas no estoque " + stock.getQuantity());
-			if (stock.getQuantity() >= notes) {
+
+			if (!notes.equals(0) && stock.getQuantity() >= notes) {
 				stock.setQuantity(stock.getQuantity() - notes);
 				stockService.save(stock);
 				System.out.println("Quantidade de notas no estoque apos esta operacao " + stock.getQuantity());
@@ -59,8 +56,6 @@ public class MovementService {
 				if (value.equals(0)) {
 					break;
 				}
-			} else {
-				System.err.println("quantidade de notas no estoque é menor do que o numero de notas necessarias ");
 			}
 		}
 
@@ -68,6 +63,7 @@ public class MovementService {
 			System.err.println("Falta de notas no estoque");
 			throw new Exception("Falta de notas no estoque!");
 		}
+
 		System.err.println("sucesso!");
 	}
 
