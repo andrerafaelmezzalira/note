@@ -15,7 +15,7 @@ public class MovementApi {
 	private MovementService service;
 
 	@RequestMapping(value = "/movement/{bankCode}/{terminalCode}/{value}", method = RequestMethod.GET)
-	public void movement(@PathVariable Integer bankCode, @PathVariable String terminalCode, @PathVariable Integer value)
+	public void movement(@PathVariable Integer bankCode, @PathVariable Integer terminalCode, @PathVariable Integer value)
 			throws Exception {
 		service.movement(bankCode, terminalCode, value);
 	}

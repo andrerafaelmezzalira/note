@@ -6,4 +6,6 @@ import note.domain.entity.Terminal;
 
 public interface TerminalRepository extends Repository<Terminal, Integer> {
 
+	Terminal findByBankCodeAndTerminalCode(Integer bankCode, Integer terminalCode);
+
 }

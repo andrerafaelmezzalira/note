@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Check;
+
 @Entity
+@Check(constraints = "value = 10 or value = 20 or value = 50 or value = 100")
 public class Note {
 
 	@Id

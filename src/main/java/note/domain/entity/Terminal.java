@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "code", "bankCode" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "bankCode", "terminalCode" }) })
 public class Terminal {
 
 	@Id
@@ -17,10 +17,10 @@ public class Terminal {
 	private Integer id;
 
 	@Column(nullable = false)
-	private String code;
+	private Integer bankCode;
 
 	@Column(nullable = false)
-	private String bankCode;
+	private Integer terminalCode;
 
 	public Integer getId() {
 		return id;
@@ -30,19 +30,19 @@ public class Terminal {
 		this.id = id;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setBankCode(String bankCode) {
+	public void setBankCode(Integer bankCode) {
 		this.bankCode = bankCode;
 	}
 
-	public String getBankCode() {
+	public Integer getBankCode() {
 		return bankCode;
+	}
+
+	public void setTerminalCode(Integer terminalCode) {
+		this.terminalCode = terminalCode;
+	}
+
+	public Integer getTerminalCode() {
+		return terminalCode;
 	}
 }

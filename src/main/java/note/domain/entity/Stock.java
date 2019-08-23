@@ -6,8 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Check;
+
 @Entity
 @IdClass(StockId.class)
+@Check(constraints = "quantity >= 0")
 public class Stock {
 
 	@ManyToOne

@@ -6,23 +6,23 @@ public class StockId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Terminal terminal;
+	private Integer terminal;
 
-	private Note note;
-	
-	public void setNote(Note note) {
+	private Integer note;
+
+	public void setNote(Integer note) {
 		this.note = note;
 	}
 	
-	public Note getNote() {
+	public Integer getNote() {
 		return note;
 	}
 	
-	public void setTerminal(Terminal terminal) {
+	public void setTerminal(Integer terminal) {
 		this.terminal = terminal;
 	}
 	
-	public Terminal getTerminal() {
+	public Integer getTerminal() {
 		return terminal;
 	}
 }
