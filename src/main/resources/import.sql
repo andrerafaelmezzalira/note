@@ -1,12 +1,5 @@
-INSERT INTO public.terminal(bank_code, terminal_code) VALUES(104,1);
-
-INSERT INTO public.note(value) VALUES(10);
-INSERT INTO public.note(value) VALUES(20);
-INSERT INTO public.note(value) VALUES(50);
-INSERT INTO public.note(value) VALUES(100);
-
-INSERT INTO public.stock(quantity, note_id, terminal_id) VALUES(100, 1, 1);
-INSERT INTO public.stock(quantity, note_id, terminal_id) VALUES(100, 2, 1);
-INSERT INTO public.stock(quantity, note_id, terminal_id) VALUES(100, 3, 1);
-INSERT INTO public.stock(quantity, note_id, terminal_id) VALUES(100, 4, 1);
+INSERT INTO public.stock(quantity, note_value, bank_code, terminal_code) VALUES(500, 10, 104, 1);
+INSERT INTO public.stock(quantity, note_value, bank_code, terminal_code) VALUES(500, 20, 104, 1);
+INSERT INTO public.stock(quantity, note_value, bank_code, terminal_code) VALUES(500, 50, 104, 1);
+INSERT INTO public.stock(quantity, note_value, bank_code, terminal_code) VALUES(500, 100, 104, 1);
 

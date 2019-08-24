@@ -1,8 +1,9 @@
 package note.domain.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class StockId implements Serializable {
+public class SupplyId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,15 +11,7 @@ public class StockId implements Serializable {
 
 	private Integer terminalCode;
 
-	private Integer noteValue;
-
-	public void setNoteValue(Integer noteValue) {
-		this.noteValue = noteValue;
-	}
-
-	public Integer getNoteValue() {
-		return noteValue;
-	}
+	private LocalDateTime startDate;
 
 	public void setBankCode(Integer bankCode) {
 		this.bankCode = bankCode;
@@ -26,6 +19,14 @@ public class StockId implements Serializable {
 
 	public Integer getBankCode() {
 		return bankCode;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getStartDate() {
+		return startDate;
 	}
 
 	public void setTerminalCode(Integer terminalCode) {

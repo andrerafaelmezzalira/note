@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import note.domain.entity.Stock;
-import note.domain.entity.Terminal;
 
 @Service
 public class MovementService {
-
-	@Autowired
-	private TerminalService terminalService;
 
 	@Autowired
 	private StockService stockService;
@@ -22,49 +18,27 @@ public class MovementService {
 	@Transactional(rollbackOn = Exception.class)
 	public void movement(Integer bankCode, Integer terminalCode, Integer value) throws Exception {
 
-		System.out.println("Valor solicitado " + value);
-
-		Terminal terminal = terminalService.get(bankCode, terminalCode);
-
-		if (terminal == null) {
-			throw new Exception("Terminal não encontrado!");
-		}
-
-		List<Stock> stocks = stockService.findStocks(terminal, value);
-
-		if (stocks.isEmpty()) {
-			System.err.println("Valor solicitado é menor que o valor da nota mínima neste terminal");
-			throw new Exception("Valor solicitado é menor que o valor da nota mínima neste terminal");
-		}
+		List<Stock> stocks = stockService.findStocks(bankCode, terminalCode, value);
 
 		for (Stock stock : stocks) {
 
-			Integer noteValue = stock.getNote().getValue();
-			Integer notes = (int) (value.doubleValue() / noteValue.doubleValue());
+			Integer notes = (int) (value.doubleValue() / stock.getNoteValue().doubleValue());
 
-			System.out.println("Valor da nota " + noteValue);
-			System.out.println("Quantidade de notas necessárias " + notes);
-			System.out.println("Quantidade de notas no estoque " + stock.getQuantity());
-
-			if (!notes.equals(0) && stock.getQuantity() >= notes) {
+			if (value.toString().endsWith("0") && (!notes.equals(0) && stock.getQuantity() >= notes)) {
 				stock.setQuantity(stock.getQuantity() - notes);
 				stockService.save(stock);
 				System.out.println("Quantidade de notas no estoque apos esta operacao " + stock.getQuantity());
-				System.out.println("valor solicitado pelo cliente era " + value);
-				value = value - (noteValue * notes);
-				System.out.println("agora ficou " + value);
+				value = value - (stock.getNoteValue() * notes);
 				if (value.equals(0)) {
 					break;
 				}
 			}
+
 		}
 
 		if (!value.equals(0)) {
-			System.err.println("Falta de notas no estoque");
 			throw new Exception("Falta de notas no estoque!");
 		}
-
-		System.err.println("sucesso!");
 	}
 
 }
