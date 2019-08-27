@@ -2,14 +2,11 @@ package note.terminal.service;
 
 import java.time.LocalDateTime;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import note.terminal.domain.entity.Terminal;
-import note.terminal.domain.entity.Stock;
 import note.terminal.domain.entity.Supply;
+import note.terminal.domain.entity.Terminal;
 import note.terminal.domain.repository.SupplyRepository;
 
 @Service
@@ -18,25 +15,7 @@ public class SupplyService {
 	@Autowired
 	private SupplyRepository repository;
 
-	@Autowired
-	private StockService service;
-
-	@Transactional(rollbackOn = Exception.class)
-	public void supply(Integer noteValue, Integer quantity, Terminal terminal) {
-
-		Stock stock = service.findStockByTerminalAndNoteValue(terminal, noteValue);
-
-		if (stock == null) {
-			stock = new Stock();
-			stock.setNoteValue(noteValue);
-			stock.setTerminal(terminal);
-		}
-		stock.setQuantity(quantity);
-		service.save(stock);
-	}
-
-	@Transactional(rollbackOn = Exception.class)
-	public String bankNoteSupply(Integer noteValue, Integer quantity, String startDate, String deliveryDate,
+	public void bankNoteSupply(Integer noteValue, Integer quantity, String startDate, String deliveryDate,
 			Terminal terminal) throws Exception {
 
 		Supply supply = new Supply();
@@ -52,8 +31,6 @@ public class SupplyService {
 		}
 
 		repository.save(supply);
-
-		return deliveryDate;
 	}
 
 }
