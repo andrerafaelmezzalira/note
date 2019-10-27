@@ -2,7 +2,8 @@
 
 Aplicação spring boot
 
-## Pré requisito
+
+## Pré requisitos
 - Java
 - Maven
 - Postgresql
